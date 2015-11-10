@@ -1,0 +1,28 @@
+
+
+Started GET "/posts" for 0:0:0:0:0:0:0:1 at 2015-11-10 12:19:47 -0600
+Processing by PostsController#index as HTML
+  Rendered posts/index.html.erb within layouts/application (17.0ms)
+Completed 500 Internal Server Error in 602ms
+
+ActionView::Template::Error (undefined method `each' for #<CouchPotato::View::PropertiesViewSpec:0x71e60260>):
+    10:   </thead>
+    11: 
+    12:   <tbody>
+    13:     <% @posts.each do |post| %>
+    14:       <tr>
+    15:         <td><%= link_to 'Show', post %></td>
+    16:         <td><%= link_to 'Edit', edit_post_path(post) %></td>
+  app/views/posts/index.html.erb:13:in `_app_views_posts_index_html_erb___678034277_8808'
+
+
+  Rendered /Users/jason/.rvm/gems/jruby-1.7.4/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (59.0ms)
+  Rendered /Users/jason/.rvm/gems/jruby-1.7.4/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (32.0ms)
+  Rendered /Users/jason/.rvm/gems/jruby-1.7.4/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (5.0ms)
+  Rendered /Users/jason/.rvm/gems/jruby-1.7.4/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (129.0ms)
+
+
+Started GET "/" for 0:0:0:0:0:0:0:1 at 2015-11-10 12:19:48 -0600
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /Users/jason/.rvm/gems/jruby-1.7.4/gems/railties-4.2.4/lib/rails/templates/rails/welcome/index.html.erb (3.0ms)
+Completed 200 OK in 14ms (Views: 12.0ms)

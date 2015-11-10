@@ -1,0 +1,13 @@
+default: &default
+  split_design_documents_per_view: false
+  default_language: :javascript
+
+development:
+  <<: *default
+  database: cp_develop
+test:
+  <<: *default
+  database: cp_develop
+production:
+  <<: *default
+  database: cp_develop
