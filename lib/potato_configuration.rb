@@ -14,4 +14,12 @@ module PotatoConfiguration
   def destroy
     self.db.destroy_document self
   end
+
+  def user
+    db.load self.user_id
+  end
+
+  def post
+    db.load self.post_id
+  end
 end
