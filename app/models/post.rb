@@ -10,13 +10,13 @@ class Post
 
   before_save :add_user_id
 
-  def user
-    db.load self.user_id
+  def comments
+    db.view Comment.post_comments(key: self.id)
   end
-
+  private
   def add_user_id
     users = db.view User.all
-    unless users
+    if users.blank?
       user = User.new(:first_name => "Test", :last_name => "Test", :email => "test_email")
       user.save
       self.user_id = user.id
