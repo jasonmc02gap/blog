@@ -4,10 +4,10 @@ default: &default
 
 development:
   <<: *default
-  database: cp_develop
+  database: blog_develop
 test:
   <<: *default
-  database: cp_develop
+  database: blog_develop
 production:
   <<: *default
-  database: cp_develop
+  database: blog_develop
