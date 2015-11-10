@@ -1,4 +1,15 @@
 <p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<div class="large-6 columns">
+  <div class="row">
+    <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
+    <div class="large-10 columns">
+      <p><strong><%= @post.title %>:</strong> <%= @post.content %></p>
+      <ul class="inline-list">
+        <li><a href=""><%= @post.user.email %></a></li>
+        <li><%= link_to 'Edit', edit_post_path(@post) %></li>
+        <li><%= link_to 'Back', posts_path %></li>
+      </ul>
+    </div>
+  </div>
+  <hr/>
+</div>

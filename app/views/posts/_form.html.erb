@@ -10,7 +10,21 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Title
+        <%= f.text_field :title %>
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Content
+        <%= f.text_field :content %>
+      </label>
+    </div>
+  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
