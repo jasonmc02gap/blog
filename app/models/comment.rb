@@ -1,4 +1,3 @@
-require '/lib/potato_configuration'
 class Comment
   include CouchPotato::Persistence
   include PotatoConfiguration
@@ -10,7 +9,7 @@ class Comment
   view :all, :key => :_id, :properties => [:_id, :_rev, :created_at, :updated_at], :type => :properties
 
   def save
-    database.save_document self  
+    self.db.save_document self  
   end
 
   def update
@@ -18,6 +17,6 @@ class Comment
   end
 
   def destroy
-    database.destroy_document self
+    self.db.destroy_document self
   end
 end

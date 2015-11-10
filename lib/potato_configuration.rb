@@ -1,6 +1,6 @@
 module PotatoConfiguration
-  def database
-  	CouchPotato.database
+  def db
+  	return CouchPotato.database
   end 
 
   def create_database
