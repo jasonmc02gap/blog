@@ -7,10 +7,12 @@ class Comment
   property :post_id, type: String
    
   view :all, :key => :_id, :properties => [:_id, :_rev, :created_at, :updated_at, :body, :user_id, :post_id], :type => :properties
-  view :post_comments, :key => :post_id, :properties => [:_id, :_rev, :created_at, :updated_at, :body, :user_id], :type => :properties
+  view :post_comments, :key => :post_id, :properties => [:_id, :_rev, :created_at, :updated_at, :body, :user_id, :post_id], :type => :properties
+
   before_save :add_user_id, :add_post_id
 
   private
+
   def add_user_id
     users = db.view User.all
     if users.blank?

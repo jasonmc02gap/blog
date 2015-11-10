@@ -13,7 +13,9 @@ class Post
   def comments
     db.view Comment.post_comments(key: self.id)
   end
+
   private
+  
   def add_user_id
     users = db.view User.all
     if users.blank?

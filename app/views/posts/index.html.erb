@@ -1,28 +1,28 @@
 <p id="notice"><%= notice %></p>
 <article>
   <h3><a href="#">Posts</a></h3>
-  <h6>Written by <a href="#">John Smith</a> on August 12, 2012.</h6>
   <% @posts.each do |post| %>
-    <div class="large-6 columns">
-      <div class="row">
-        <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
-        <div class="large-10 columns">
-            <p><strong><%= post.title %>:</strong> <%= post.content %></p>
-            <div>
-              
-            </div>
-            <ul class="inline-list">
-              <li><a href=""><%= post.user.email %></a></li>
-              <li><%= link_to 'Show', post %></li>
-              <li><%= link_to 'Edit', edit_post_path(post) %></li>
-              <li><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-            </ul>
-        </div>
+    <h6>Written by <a href="#"><%= "#{post.user.first_name} #{post.user.last_name}" %></a> on August 12, 2012.</h6>
+    <div class="row">
+      <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
+      <div class="large-10 columns">
+        <p><strong><%= post.title %>:</strong> <%= post.content %></p>
+        <ul class="inline-list">
+          <li><a href=""><%= post.user.email %></a></li>
+          <li><%= link_to 'Show', post %></li>
+          <li><%= link_to 'Edit', edit_post_path(post) %></li>
+          <li><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        </ul>
+        <h6><%= comments_counter(post.comments.length) %></h6>
+        <% post.comments.each do |comment| %>
+          <div class="row">
+            <div class="large-2 columns small-3"><img src="http://placehold.it/50x50&text=[img]"/></div>
+            <div class="large-10 columns"><p><%= comment.body %></p></div>
+          </div>
+        <% end %>
       </div>
-      <hr/>
     </div>
+    <hr/>
   <% end %>
-
 </article>
-<hr/>
 <%= link_to 'New Post', new_post_path %>
