@@ -13,13 +13,9 @@
           <li><%= link_to 'Edit', edit_post_path(post) %></li>
           <li><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></li>
         </ul>
-        <h6><%= comments_counter(post.comments.length) %></h6>
-        <% post.comments.each do |comment| %>
-          <div class="row">
-            <div class="large-2 columns small-3"><img src="http://placehold.it/50x50&text=[img]"/></div>
-            <div class="large-10 columns"><p><%= comment.body %></p></div>
-          </div>
-        <% end %>
+        <div id="comments">
+          <%= render partial: "/comments/comments", locals: { post: post }%>
+        </div>
       </div>
     </div>
     <hr/>

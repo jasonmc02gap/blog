@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<div class="large-6 columns">
+  <h6>Written by <a href="#"><%= "#{@post.user.first_name} #{@post.user.last_name}" %></a> on August 12, 2012.</h6>
   <div class="row">
     <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
     <div class="large-10 columns">
@@ -13,10 +13,9 @@
         <%= render partial: "/comments/comments", locals: { post: @post }%>
       </div>
       <%= form_for(@comment, remote: true) do |f| %>
-        <%= f.text_field :body %>
+        <%= f.text_area :body %>
         <%= f.submit%>
       <% end %>
     </div>
   </div>
   <hr/>
-</div>
