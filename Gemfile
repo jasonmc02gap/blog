@@ -32,8 +32,5 @@ gem 'activemodel'
 gem 'couch_potato'
 gem 'tzinfo'
 gem 'foundation-rails'
-# gem 'devise'
-# gem 'devise_couch'
-# gem "better_errors"
-# gem "binding_of_caller"
-# gem 'pry-rails'
+gem 'pry'
+gem 'pry-rails'

@@ -21,8 +21,8 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    p post_params
 
+    @post._attachments = construct_attach
     @post.user_id = session[:user_id]
 
     respond_to do |format|
@@ -52,5 +52,17 @@ class PostsController < ApplicationController
 
     def post_params
       params.require(:post).permit(:title, :content, :image)
+    end
+
+    def attach_image
+      File.read(post_params[:image].tempfile)
+    end
+
+    def construct_attach
+      {"post_image" => {
+        'data' => attach_image, 
+        'content_type' => post_params[:image].content_type
+        }
+      }
     end
 end

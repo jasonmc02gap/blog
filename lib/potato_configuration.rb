@@ -22,4 +22,8 @@ module PotatoConfiguration
   def post
     db.load self.post_id
   end
+
+  def database_path
+    [CouchPotato::Config.database_host,CouchPotato::Config.database_name].join("/")
+  end
 end

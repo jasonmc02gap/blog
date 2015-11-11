@@ -7,6 +7,7 @@
       <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
       <div class="large-10 columns">
         <p><strong><%= post.title %>:</strong> <%= post.content %></p>
+        <%= image_tag(database_path + "/#{post.id}/post_image") %>
         <ul class="inline-list">
           <li><%= link_to 'Show', post %></li>
           <% if session[:user_id] && session[:user_id] == post.user_id %>

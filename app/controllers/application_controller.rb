@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
   def fetch_featured
     posts = db.view(Post.all)
 
+    return nil if posts.blank?
+
     comments_count = []
     posts.each do |post|
       comments_count.push({:post => post, :comments => db.view(Comment.post_comments(:key => post.id)).size})

@@ -44,11 +44,13 @@
           <li><a href="#">Fun</a></li>
           <li><a href="#">Weasels</a></li>
         </ul>
-        <div class="panel">
-          <h5>Featured</h5>
-          <p><%= @featured_post.content %></p>
-          <%= link_to 'Read More →', @featured_post %>
-        </div>
+        <% if @featured_post %>
+          <div class="panel">
+            <h5>Featured</h5>
+            <p><%= @featured_post.content %></p>
+            <%= link_to 'Read More →', @featured_post %>
+          </div>
+        <% end %>
       </aside>
     </div>
     <footer class="row">
