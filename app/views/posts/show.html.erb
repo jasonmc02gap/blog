@@ -5,7 +5,7 @@
     <div class="large-10 columns">
       <p><strong><%= @post.title %>:</strong> <%= @post.content %></p>
       <ul class="inline-list">
-        <% if session[:user_id] && session[:user_id] == post.user_id %>
+        <% if session[:user_id] && session[:user_id] == @post.user_id %>
           <li><a href=""><%= @post.user.email %></a></li>
           <li><%= link_to 'Edit', edit_post_path(@post) %></li>
           <li><%= link_to 'Back', posts_path %></li>

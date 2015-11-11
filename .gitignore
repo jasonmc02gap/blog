@@ -1,4 +1,4 @@
-tmp/*
-log/*
-Gemfile.lock
-.keep
+/tmp/*
+/log/*
+/Gemfile.lock
+/.keep
