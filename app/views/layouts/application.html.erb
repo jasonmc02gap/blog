@@ -18,8 +18,13 @@
          <ul class="button-group">
            <li><a href="#" class="button">Link 1</a></li>
            <li><a href="#" class="button">Link 2</a></li>
-           <li><a href="#" class="button">Link 3</a></li>
-           <li><a href="#" class="button">Link 4</a></li>
+           <% if session[:user_id] %>
+            <li><a href="#" class="button">Link 3</a></li>
+            <li><%= link_to "Log Out", log_out_path, class: "button" %></li>
+          <% else %>
+            <li><%= link_to "Sign Up", new_user_path, class: "button" %></li>
+            <li><%= link_to "Sign In", sign_in_path, class: "button" %></li>
+          <% end %>
           </ul>
         </div>
         <h1>Blog <small>This is my blog. It's awesome.</small></h1>

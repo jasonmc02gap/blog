@@ -18,7 +18,8 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-     
+    @comment.user_id = session[:user_id]
+
     respond_to do |format|
       if @comment.save
         @post = db.load @comment.post_id
@@ -32,6 +33,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       @comment.body = comment_params[:body]
+      
       @comment.save ? format.html { redirect_to @comment, notice: 'Comment was successfully updated.' } : format.html { render :edit }
     end
   end

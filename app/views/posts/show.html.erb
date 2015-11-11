@@ -13,6 +13,7 @@
         <%= render partial: "/comments/comments", locals: { post: @post }%>
       </div>
       <%= form_for(@comment, remote: true) do |f| %>
+        <%= f.hidden_field :post_id, :value => @post.id %>
         <%= f.text_area :body %>
         <%= f.submit%>
       <% end %>

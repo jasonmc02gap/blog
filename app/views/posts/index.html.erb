@@ -8,10 +8,12 @@
       <div class="large-10 columns">
         <p><strong><%= post.title %>:</strong> <%= post.content %></p>
         <ul class="inline-list">
-          <li><a href=""><%= post.user.email %></a></li>
-          <li><%= link_to 'Show', post %></li>
-          <li><%= link_to 'Edit', edit_post_path(post) %></li>
-          <li><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+          <% if session[:user_id] && session[:user_id] == post.user_id %>
+            <li><a href=""><%= post.user.email %></a></li>
+            <li><%= link_to 'Show', post %></li>
+            <li><%= link_to 'Edit', edit_post_path(post) %></li>
+            <li><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+          <% end %>
         </ul>
         <div id="comments">
           <%= render partial: "/comments/comments", locals: { post: post }%>

@@ -4,8 +4,10 @@
     <div class="large-2 columns small-3"><img src="http://placehold.it/50x50&text=[img]"/></div>
     <div class="large-10 columns"><p style="margin-bottom: 10px;"><%= comment.body %></p></div>
     <div class="large-10 columns">
-      <%= link_to 'Edit', edit_comment_path(comment), :style => "margin-right: 10px;font-size: 11px;" %>
-      <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }, :style => "margin-right: 10px;font-size: 11px;" %>
+      <% if session[:user_id] && session[:user_id] == comment.user_id %>
+        <%= link_to 'Edit', edit_comment_path(comment), :style => "margin-right: 10px;font-size: 11px;" %>
+        <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }, :style => "margin-right: 10px;font-size: 11px;" %>
+      <% end %>
     </div>
   </div>
 <% end %>

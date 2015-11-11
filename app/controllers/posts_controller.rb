@@ -2,6 +2,7 @@ include PotatoConfiguration
 
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate, :except => [:index]
 
   def index
     @posts = db.view Post.all
@@ -20,6 +21,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.user_id = session[:user_id]
 
     respond_to do |format|
       @post.save ? format.html { redirect_to @post, notice: 'Post was successfully created.' } : format.html { render :new }

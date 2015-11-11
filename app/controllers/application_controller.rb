@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :fetch_featured
+  before_action :authenticate
 
 
   def fetch_featured
@@ -19,5 +20,11 @@ class ApplicationController < ActionController::Base
     comments_count.sort_by {|field| field[:comments] }
 
     @featured_post = comments_count.first[:post]
+  end
+
+  private
+
+  def authenticate
+    redirect_to root_url, notice: "Not Signed In" if session[:user_id].blank?
   end
 end
