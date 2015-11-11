@@ -1,0 +1,32 @@
+<%= form_tag sessions_path do %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Email
+        <%= email_field_tag :email %>
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Password
+        <%= password_field_tag :password %>
+      </label>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>

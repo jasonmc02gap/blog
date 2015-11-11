@@ -10,7 +10,41 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="row">
+    <div class="large-12 columns">
+      <label>First Name
+        <%= f.text_field :first_name %>
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Last Name
+        <%= f.text_field :last_name %>
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Email
+        <%= f.email_field :email %>
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Password
+        <%= f.password_field :password %>
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Password confirmation
+        <%= f.password_field :password_confirmation %>
+      </label>
+    </div>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
