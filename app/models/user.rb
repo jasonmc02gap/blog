@@ -9,8 +9,6 @@ class User
   property :email, type: String
   property :password_hash, type: String
   property :password_salt, type: String
-  property :post_ids, type: Array
-  property :comment_ids, type: Array
 
   view :all, :key => :_id, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash], :type => :properties
   view :by_email, :key => :email, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash], :type => :properties
