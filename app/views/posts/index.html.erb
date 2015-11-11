@@ -4,7 +4,7 @@
   <% @posts.each do |post| %>
     <h6>Written by <a href="#"><%= "#{post.user.first_name} #{post.user.last_name}" %></a> on August 12, 2012.</h6>
     <div class="row">
-      <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
+      <div class="large-2 columns small-3"><img src="<%= profile_image(post.user_id) %>"/></div>
       <div class="large-10 columns">
         <p><strong><%= post.title %>:</strong> <%= post.content %></p>
         <% unless post._attachments.blank? %>

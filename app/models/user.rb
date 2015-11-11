@@ -1,20 +1,25 @@
 class User
+
   include CouchPotato::Persistence
   include PotatoConfiguration
-  attr_accessor :password
-  validates_confirmation_of :password
-  validates :password, :first_name, :last_name, :email, presence: true, on: :create
+  
   property :first_name, type: String
   property :last_name, type: String
   property :email, type: String
   property :password_hash, type: String
   property :password_salt, type: String
 
+  attr_accessor :password
+  attr_accessor :image
+
   view :all, :key => :_id, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash], :type => :properties
   view :by_email, :key => :email, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash], :type => :properties
-  before_save :encrypt_password
-  validate :uniqueness_of_email
   
+  before_save :encrypt_password
+
+  validates_confirmation_of :password
+  validates :password, :first_name, :last_name, :email, presence: true, on: :create
+  validate :uniqueness_of_email
 
   def self.authenticate(email,password)
     user = db.view User.by_email(key: email)

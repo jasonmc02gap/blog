@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
 
-    @post._attachments = construct_attach
+    @post._attachments = construct_attach unless post_params[:image].blank?
     @post.user_id = session[:user_id]
 
     respond_to do |format|

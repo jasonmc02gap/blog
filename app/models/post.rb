@@ -1,4 +1,5 @@
 class Post
+
   include CouchPotato::Persistence
 
   property :title, type: String
@@ -6,6 +7,7 @@ class Post
   property :user_id, type: String
 
   attr_accessor :image
+  
   view :all, :key => :_id, :properties => [:_id, :_rev, :_attachments, :created_at, :updated_at, :title, :content, :user_id, :comment_ids], :type => :properties
   view :user_posts, :key => :user_id, :properties => [:_id, :_rev, :_attachments, :created_at, :updated_at, :title, :content, :user_id, :comment_ids], :type => :properties
   def comments

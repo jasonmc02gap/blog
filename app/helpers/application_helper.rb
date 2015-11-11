@@ -10,4 +10,14 @@ module ApplicationHelper
       return "#{comments_length} comments"
     end
   end
+
+  def profile_image(user_id)
+    user = db.load(user_id)
+
+    if user._attachments.blank?
+      return "http://placehold.it/80x80&text=[img]"
+    else
+      db.database_path + "/#{user_id}/profile"
+    end
+  end
 end
