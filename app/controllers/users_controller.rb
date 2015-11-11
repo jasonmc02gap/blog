@@ -1,7 +1,7 @@
 include PotatoConfiguration
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :authenticate, only: [:create,:new]
   def index
     @users = db.view User.all
   end
@@ -18,9 +18,13 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
-      @user.save ? format.html { redirect_to @user, notice: 'User was successfully created.' } : format.html { render :new }
+      if @user.save  
+        session[:user_id] = @user.id
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
+      else
+        format.html { render :new }
+      end
     end
   end
 

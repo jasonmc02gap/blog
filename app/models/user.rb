@@ -16,6 +16,7 @@ class User
   view :by_email, :key => :email, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash], :type => :properties
   before_save :encrypt_password
   validate :uniqueness_of_email
+  
 
   def self.authenticate(email,password)
     user = db.view User.by_email(key: email)

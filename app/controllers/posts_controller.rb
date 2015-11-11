@@ -2,7 +2,7 @@ include PotatoConfiguration
 
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate, :except => [:index]
+  before_action :authenticate, :except => [:index, :show]
 
   def index
     @posts = db.view Post.all
@@ -21,6 +21,8 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    p post_params
+
     @post.user_id = session[:user_id]
 
     respond_to do |format|
@@ -49,6 +51,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :content)
+      params.require(:post).permit(:title, :content, :image)
     end
 end

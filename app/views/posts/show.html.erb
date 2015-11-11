@@ -5,17 +5,21 @@
     <div class="large-10 columns">
       <p><strong><%= @post.title %>:</strong> <%= @post.content %></p>
       <ul class="inline-list">
-        <li><a href=""><%= @post.user.email %></a></li>
-        <li><%= link_to 'Edit', edit_post_path(@post) %></li>
-        <li><%= link_to 'Back', posts_path %></li>
+        <% if session[:user_id] && session[:user_id] == post.user_id %>
+          <li><a href=""><%= @post.user.email %></a></li>
+          <li><%= link_to 'Edit', edit_post_path(@post) %></li>
+          <li><%= link_to 'Back', posts_path %></li>
+        <% end %>
       </ul>
       <div id="comments">
         <%= render partial: "/comments/comments", locals: { post: @post }%>
       </div>
-      <%= form_for(@comment, remote: true) do |f| %>
-        <%= f.hidden_field :post_id, :value => @post.id %>
-        <%= f.text_area :body %>
-        <%= f.submit%>
+      <% if session[:user_id] %>
+        <%= form_for(@comment, remote: true) do |f| %>
+          <%= f.hidden_field :post_id, :value => @post.id %>
+          <%= f.text_area :body %>
+          <%= f.submit%>
+        <% end %>
       <% end %>
     </div>
   </div>
