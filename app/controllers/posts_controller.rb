@@ -45,6 +45,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def my_posts
+    @posts = db.view Post.user_posts(key: session[:user_id])
+  end
+
   private
     def set_post
       @post = db.load params[:id]

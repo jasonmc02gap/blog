@@ -8,7 +8,7 @@ class Comment
    
   view :all, :key => :_id, :properties => [:_id, :_rev, :created_at, :updated_at, :body, :user_id, :post_id], :type => :properties
   view :post_comments, :key => :post_id, :properties => [:_id, :_rev, :created_at, :updated_at, :body, :user_id, :post_id], :type => :properties
-
+  view :user_comments, :key => :user_id, :properties => [:_id, :_rev, :created_at, :updated_at, :body, :user_id, :post_id], :type => :properties
   private
 
 end

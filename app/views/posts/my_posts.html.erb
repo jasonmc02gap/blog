@@ -1,0 +1,21 @@
+<article>
+  <h3><a href="#"> My Posts</a></h3>
+  <% @posts.each do |post| %>
+    <div class="row">
+      <div class="large-2 columns small-3"><img src="http://placehold.it/80x80&text=[img]"/></div>
+      <div class="large-10 columns">
+        <p><strong><%= post.title %>:</strong> <%= post.content %></p>
+        <% unless post._attachments.blank? %>
+          <%= image_tag(database_path + "/#{post.id}/post_image") %>
+        <%end%>
+        <ul class="inline-list">
+          <li><%= link_to 'Show', post %></li>
+          <li><a href=""><%= post.user.email %></a></li>
+          <li><%= link_to 'Edit', edit_post_path(post) %></li>
+          <li><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        </ul>
+      </div>
+    </div>
+    <hr/>
+  <% end %>
+</article>

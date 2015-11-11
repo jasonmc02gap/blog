@@ -24,6 +24,7 @@ class CommentsController < ApplicationController
       if @comment.save
         @post = db.load @comment.post_id
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.js
       else
         format.html { render :new }
       end
@@ -43,6 +44,10 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
     end
+  end
+
+  def my_comments
+    @comments = db.view Comment.user_comments(key: session[:user_id])
   end
 
   private
