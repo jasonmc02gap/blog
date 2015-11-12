@@ -12,9 +12,9 @@ class User
   attr_accessor :password
   attr_accessor :image
 
-  view :all, :key => :_id, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash], :type => :properties
-  view :by_email, :key => :email, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash], :type => :properties
-  view :by_slug, :key => :slug, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash], :type => :properties
+  view :all, :key => :_id, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash, :slug], :type => :properties
+  view :by_email, :key => :email, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash, :slug], :type => :properties
+  view :by_slug, :key => :slug, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash, :slug], :type => :properties
 
   before_save :encrypt_password, :generate_slug
 
@@ -39,6 +39,10 @@ class User
     user.password_hash == BCrypt::Engine.hash_secret(password,user.password_salt)
   end
 
+  def generate_slug
+    self.slug = "#{self.first_name} #{self.last_name}".to_s.downcase.gsub(/[^a-z1-9]+/, '-')
+  end
+
   private
 
   def encrypt_password
@@ -54,9 +58,5 @@ class User
 
   def not_empty_fields
     first_name.blank? || last_name.blank? || email.blank? || password.blank? || password_confirmation.blank? ? errors.add(:base,"Fields can't be blank") : true
-  end
-  
-  def generate_slug
-    self.slug =  "#{first_name} #{last_name}".parameterize
   end
 end

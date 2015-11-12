@@ -26,7 +26,7 @@ class PostsController < ApplicationController
     @post.user_id = session[:user_id]
 
     respond_to do |format|
-      @post.save ? format.html { redirect_to @post, notice: 'Post was successfully created.' } : format.html { render :new }
+      @post.save ? format.html { redirect_to post_path(:id => @post.slug), notice: 'Post was successfully created.' } : format.html { render :new }
     end
   end
 
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
 
   private
     def set_post
-      @post = db.load params[:id]
+      @post = db.view(Post.by_slug(params[:id])).first
     end
 
     def post_params

@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
   private
     def set_user
-      @user = db.load params[:id]
+      @user = db.view(User.by_slug(params[:id])).first
     end
 
     def user_params
