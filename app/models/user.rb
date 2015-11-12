@@ -33,6 +33,7 @@ class User
   def self.password_match(password,user)
     user.password_hash == BCrypt::Engine.hash_secret(password,user.password_salt)
   end
+
   private
 
   def encrypt_password
@@ -43,18 +44,10 @@ class User
   end
 
   def uniqueness_of_email
-    if (db.view User.by_email(key: email )).blank?
-      true
-    else
-      errors.add(:email,"is already taken")
-    end
+    db.view(User.by_email(key: email)).blank? ? true : errors.add(:email,"is already taken")
   end
 
   def not_empty_fields
-    unless !(first_name.blank? || last_name.blank? || email.blank? || password.blank? || password_confirmation.blank?)
-      errors.add(:base,"Fields can't be blank")
-    else
-      true
-    end
+    first_name.blank? || last_name.blank? || email.blank? || password.blank? || password_confirmation.blank? ? errors.add(:base,"Fields can't be blank") : true
   end
 end
