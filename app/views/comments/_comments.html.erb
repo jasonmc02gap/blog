@@ -1,7 +1,7 @@
 <h6><%= comments_counter(post.comments.length) %></h6>
 <% post.comments.each do |comment| %>
   <div class="row" style="margin-bottom: 10px;">
-    <div class="large-2 columns small-3"><img src="<%= profile_image(comment.user_id) %>"/></div>
+    <div class="large-2 columns small-3"><img src="<%= profile_image_from_id(comment.user_id) %>"/></div>
     <div class="large-10 columns"><p style="margin-bottom: 10px;"><%= comment.body %></p></div>
     <div class="large-10 columns">
       <% if session[:user_id] && session[:user_id] == comment.user_id %>

@@ -11,13 +11,12 @@ module ApplicationHelper
     end
   end
 
-  def profile_image(user_id)
+  def profile_image_from_id(user_id)
     user = db.load(user_id)
+    profile_image(user)
+  end
 
-    if user._attachments.blank?
-      return "http://placehold.it/80x80&text=[img]"
-    else
-      db.database_path + "/#{user_id}/profile"
-    end
+  def profile_image(user)
+    user._attachments.blank? ? "http://placehold.it/80x80&text=[img]" : db.database_path + "/#{user_id}/profile"
   end
 end

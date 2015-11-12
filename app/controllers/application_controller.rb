@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :fetch_featured
   before_action :authenticate
+  before_action :set_user
 
 
   def fetch_featured
@@ -28,5 +29,9 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     redirect_to root_url, notice: "Not Signed In" if session[:user_id].blank?
+  end
+
+  def set_user
+    @current_user ||= db.load(session[:user_id])
   end
 end

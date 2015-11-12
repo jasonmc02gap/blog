@@ -2,9 +2,10 @@
 <article>
   <h3><a href="#">Posts</a></h3>
   <% @posts.each do |post| %>
-    <h6>Written by <a href="#"><%= "#{post.user.first_name} #{post.user.last_name}" %></a> on August 12, 2012.</h6>
+    <% user = post.user %>
+    <h6>Written by <a href="#"><%= "#{user.first_name} #{user.last_name}" %></a> on August 12, 2012.</h6>
     <div class="row">
-      <div class="large-2 columns small-3"><img src="<%= profile_image(post.user_id) %>"/></div>
+      <div class="large-2 columns small-3"><img src="<%= profile_image(user) %>"/></div>
       <div class="large-10 columns">
         <p><strong><%= post.title %>:</strong> <%= post.content %></p>
         <% unless post._attachments.blank? %>
@@ -12,8 +13,8 @@
         <%end%>  
         <ul class="inline-list">
           <li><%= link_to 'Show', post %></li>
-          <% if session[:user_id] && session[:user_id] == post.user_id %>
-            <li><a href=""><%= post.user.email %></a></li>
+          <% if session[:user_id] && session[:user_id] == user.id %>
+            <li><a href=""><%= user.email %></a></li>
             <li><%= link_to 'Edit', edit_post_path(post) %></li>
             <li><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></li>
           <% end %>

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
-  <div class="large-4 columns small-2"><img src="<%= profile_image(session[:user_id]) %>"/></div>
+  <div class="large-4 columns small-2"><img src="<%= profile_image_from_id(session[:user_id]) %>"/></div>
   <div class="large-8 columns">
     <p>First name: <%= @user.first_name %></p>
     <p>Last name: <%= @user.last_name %></p>
