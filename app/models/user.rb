@@ -43,18 +43,16 @@ class User
   end
 
   def uniqueness_of_email
-    unless (db.view User.by_email(key: email )).blank?
+    if (db.view User.by_email(key: email )).blank?
       true
     else
       errors.add(:email,"is already taken")
-      false
     end
   end
 
   def not_empty_fields
     unless !(first_name.blank? || last_name.blank? || email.blank? || password.blank? || password_confirmation.blank?)
       errors.add(:base,"Fields can't be blank")
-      false
     else
       true
     end
