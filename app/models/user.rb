@@ -19,7 +19,7 @@ class User
 
   validates_confirmation_of :password
   validates :password, :first_name, :last_name, :email, presence: true, on: :create
-  validate :uniqueness_of_email
+  validate :uniqueness_of_email, :not_empty_fields
 
   def self.authenticate(email,password)
     user = db.view User.by_email(key: email)
@@ -43,6 +43,20 @@ class User
   end
 
   def uniqueness_of_email
-    true
+    unless (db.view User.by_email(key: email )).blank?
+      true
+    else
+      errors.add(:email,"is already taken")
+      false
+    end
+  end
+
+  def not_empty_fields
+    unless !(first_name.blank? || last_name.blank? || email.blank? || password.blank? || password_confirmation.blank?)
+      errors.add(:base,"Fields can't be blank")
+      false
+    else
+      true
+    end
   end
 end

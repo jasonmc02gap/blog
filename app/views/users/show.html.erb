@@ -1,14 +1,16 @@
 <p id="notice"><%= notice %></p>
-<div class="row">
+<div class="large-6 columns">
 	<div class="row">
-	  <div class="large-2 columns small-3"><img src="<%= profile_image(session[:user_id]) %>"/></div>
-	    <div class="large-10 columns">
-	      <p>First name: <%= @user.first_name %></p>
-	      <p>Last name: <%= @user.last_name %></p>
-	      <p>Email: <%= @user.email %></p>
-	   </div>
-	  </div>
+		<div class="row">
+		  <div class="large-4 columns small-2"><img src="<%= profile_image(session[:user_id]) %>"/></div>
+		    <div class="large-6 columns">
+		      <p>First name: <%= @user.first_name %></p>
+		      <p>Last name: <%= @user.last_name %></p>
+		      <p>Email: <%= @user.email %></p>
+		   </div>
+		  </div>
+		</div>
+		<%= link_to 'Edit', edit_user_path(@user) %> |
+		<%= link_to 'Back', root_path %>
 	</div>
-	<%= link_to 'Edit', edit_user_path(@user) %> |
-	<%= link_to 'Back', root_path %>
 </div>
