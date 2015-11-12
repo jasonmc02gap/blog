@@ -5,6 +5,7 @@ class Post
   property :title, type: String
   property :content, type: String
   property :user_id, type: String
+  property :slug, type: String
 
   attr_accessor :image
   

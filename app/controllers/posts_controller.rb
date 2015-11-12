@@ -39,6 +39,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @comments = db.view Comment.post_comments(key: @post.id )
+    @comments.map &:destroy
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }

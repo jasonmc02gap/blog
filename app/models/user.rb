@@ -2,24 +2,29 @@ class User
 
   include CouchPotato::Persistence
   include PotatoConfiguration
-  
   property :first_name, type: String
   property :last_name, type: String
   property :email, type: String
   property :password_hash, type: String
   property :password_salt, type: String
+  property :slug, type: String
 
   attr_accessor :password
   attr_accessor :image
 
   view :all, :key => :_id, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash], :type => :properties
   view :by_email, :key => :email, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash], :type => :properties
-  
-  before_save :encrypt_password
+  view :by_slug, :key => :slug, :properties => [:_id, :_rev, :created_at, :updated_at, :first_name, :last_name, :email, :password_salt, :password_hash], :type => :properties
+
+  before_save :encrypt_password, :generate_slug
 
   validates_confirmation_of :password
   validates :password, :first_name, :last_name, :email, presence: true, on: :create
   validate :uniqueness_of_email, :not_empty_fields
+  
+  def to_param
+    slug
+  end
 
   def self.authenticate(email,password)
     user = db.view User.by_email(key: email)
@@ -49,5 +54,9 @@ class User
 
   def not_empty_fields
     first_name.blank? || last_name.blank? || email.blank? || password.blank? || password_confirmation.blank? ? errors.add(:base,"Fields can't be blank") : true
+  end
+  
+  def generate_slug
+    self.slug =  "#{first_name} #{last_name}".parameterize
   end
 end
