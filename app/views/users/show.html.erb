@@ -1,4 +1,14 @@
 <p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="row">
+	<div class="row">
+	  <div class="large-2 columns small-3"><img src="<%= profile_image(session[:user_id]) %>"/></div>
+	    <div class="large-10 columns">
+	      <p>First name: <%= @user.first_name %></p>
+	      <p>Last name: <%= @user.last_name %></p>
+	      <p>Email: <%= @user.email %></p>
+	   </div>
+	  </div>
+	</div>
+	<%= link_to 'Edit', edit_user_path(@user) %> |
+	<%= link_to 'Back', root_path %>
+</div>

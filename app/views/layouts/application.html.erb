@@ -17,6 +17,7 @@
         <div class="nav-bar right">
          <ul class="button-group">
            <% if session[:user_id] %>
+            <li><%= link_to "My Profile", user_path(session[:user_id]), class: "button" %></li>
             <li><%= link_to "Log Out", log_out_path, class: "button" %></li>
           <% else %>
             <li><%= link_to "Sign Up", new_user_path, class: "button" %></li>
