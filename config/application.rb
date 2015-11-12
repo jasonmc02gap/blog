@@ -6,6 +6,7 @@ require "sprockets/railtie"
 require "rails/test_unit/railtie"
 require "rubygems"
 require "couch_potato"
+require "active_model"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

@@ -1,5 +1,5 @@
 class User
-
+  include ActiveModel::Validations
   include CouchPotato::Persistence
   include PotatoConfiguration
   property :first_name, type: String
@@ -19,9 +19,8 @@ class User
   before_save :encrypt_password, :generate_slug
 
   validates_confirmation_of :password
-  validates :password, :first_name, :last_name, :email, presence: true, on: :create
-  validate :uniqueness_of_email, :not_empty_fields
-  
+  validates :email, :first_name, :last_name, :password , presence: true
+  validate :uniqueness_of_email
   def to_param
     slug
   end
@@ -40,7 +39,11 @@ class User
   end
 
   def generate_slug
-    self.slug = "#{self.first_name} #{self.last_name}".to_s.downcase.gsub(/[^a-z1-9]+/, '-')
+    slug =   "#{self.first_name} #{self.last_name}".to_s.downcase.gsub(/[^a-z1-9]+/, '-')
+    while (db.view User.by_slug(key: slug)).present?
+       slug = "#{self.first_name} #{self.last_name} #{Random.rand(100000)}".to_s.downcase.gsub(/[^a-z1-9]+/, '-')
+    end
+    self.slug = slug
   end
 
   private
@@ -54,9 +57,5 @@ class User
 
   def uniqueness_of_email
     db.view(User.by_email(key: email)).blank? ? true : errors.add(:email,"is already taken")
-  end
-
-  def not_empty_fields
-    first_name.blank? || last_name.blank? || email.blank? || password.blank? || password_confirmation.blank? ? errors.add(:base,"Fields can't be blank") : true
   end
 end

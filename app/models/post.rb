@@ -1,7 +1,7 @@
 class Post
 
   include CouchPotato::Persistence
-
+  include ActiveModel::Validations
   property :title, type: String
   property :content, type: String
   property :user_id, type: String
@@ -15,7 +15,7 @@ class Post
   
   before_save :generate_slug
 
-  validate :not_empty_fields
+  validates :title,:content , presence: true
 
   def to_param
     slug
@@ -26,12 +26,11 @@ class Post
   end
 
   def generate_slug
-    self.slug = self.title.to_s.downcase.gsub(/[^a-z1-9]+/, '-')
+    slug =   sel.title.to_s.downcase.gsub(/[^a-z1-9]+/, '-')
+    while (db.view Post.by_slug(key: slug)).present?
+       slug = "#{self.title} #{Random.rand(100000)}".to_s.downcase.gsub(/[^a-z1-9]+/, '-')
+    end
+    self.slug = slug
   end
 
-  private
-
-  def not_empty_fields
-    title.blank? || content.blank? || user_id.blank? ? errors.add(:base,"Fields can't be blank") : true
-  end
 end
